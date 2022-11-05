@@ -5,11 +5,11 @@ enable_global_backup: true
 
 # Files
 enable_file_backup: true
-backup_file_store: "../example/backup/files"
+backup_file_store: "example/backup/files"
 backup_file_copies: 3
 backup_file_list:
-  - "../example/file1.txt"
-  - "../example/file2.txt"
+  - "example/file1.txt"
+  - "example/file2.txt"
 
 
 # Directories

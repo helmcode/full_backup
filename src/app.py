@@ -1,4 +1,4 @@
-import yaml, os
+import yaml, os, datetime
 
 # Local Imports
 from backup.files import backup_files
@@ -6,24 +6,27 @@ from backup.files import backup_files
 
 def main():
     config_file = os.environ['FULL_BACKUP_CONFIG']
+    day = datetime.datetime.now().strftime("%d")
+    month = datetime.datetime.now().strftime("%m")
+    year = datetime.datetime.now().strftime("%Y")
+    date = f"{day}_{month}_{year}"
 
     try:
         with open(config_file) as file:
             try:
                 data = yaml.safe_load(file)
-                if data["enable_global_backup"]:
+                if data['enable_global_backup']:
                     print("Global Backup Enabled")
 
                     # File Backup
-                    backup_files(data)
+                    backup_files(data, date)
                 else:
                     print("Global Backup Disabled")
 
             except yaml.YAMLError as exception:
-                print(exception)
-    except FileNotFoundError:
-        print("Configuration file doesn't exist or is incorrect. Please, verify that the FULL_BACKUP_CONFIG environment variable is correct")
-
+                print(f"Configuration file is incorrect. Please review this error:\n{exception}")
+    except FileNotFoundError as exception:
+        print(f"Configuration file does not exist or is incorrect. Please review this error:\n{exception}")
 
 
 # Start App
