@@ -9,7 +9,6 @@ def main():
     day = datetime.datetime.now().strftime("%d")
     month = datetime.datetime.now().strftime("%m")
     year = datetime.datetime.now().strftime("%Y")
-    date = f"{day}_{month}_{year}"
 
     try:
         with open(config_file) as file:
@@ -19,7 +18,7 @@ def main():
                     print("Global Backup Enabled")
 
                     # File Backup
-                    backup_files(data, date)
+                    backup_files(data, day, month, year)
                 else:
                     print("Global Backup Disabled")
 
